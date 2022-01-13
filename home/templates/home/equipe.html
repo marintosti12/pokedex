@@ -1,0 +1,38 @@
+{% load static %}
+{% load tailwind_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.js"></script>
+    {% tailwind_css %}
+</head>
+<body class="bg-gray-100">
+{% include "home/navbar.html" %}
+<div id="app">
+    <div class="grid grid-cols-4 mt-2 gap-4 p-4">
+        <div class="rounded-xl overflow-hidden shadow-lg bg-white p-2 pokemon cursor-pointer" v-for="(pokemon, index) in pokemons" :key="pokemon.id">
+            <div class="flex content-center justify-center">
+                <img class="" :src="getPokemonImage(pokemon.id)">
+            </div>
+            <div class="flex justify-center content-between">
+                <div class="flex-col text-center">
+                    <h1 class="text-gray-700 text-xs" >N°[[ pokemon.id]]</h1>
+                    <h1 class="font-bold mt-2 text-xl">[[ pokemon.name ]]</h1>
+                </div>
+            </div>
+            <div class="flex justify-center en mt-8">
+                <button v-on:click="deletePokemon($event, index)" class="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Supprimer
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/equipe.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+{% load tailwind_tags %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% tailwind_css %}
+
+</head>
+<body>
+<nav class="flex items-center justify-between flex-wrap bg-red-500 p-6">
+    <a href="/"><div class="flex items-center flex-shrink-0 text-white mr-6">
+        <img src="{% static 'images/pokeball.svg' %}" height="45" width="45">
+        <span class="font-semibold text-xl tracking-tight ml-4">Pokedex</span>
+    </div></a>
+    <div class="block lg:hidden">
+        <button class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
+            <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+        </button>
+    </div>
+    <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+        <div class="text-sm lg:flex-grow">
+            <a href="/equipe" class="block mt-1 lg:inline-block text-lg text-white hover:text-white mr-4">
+                Votre Equipe
+            </a>
+        </div>
+        <div>
+            <a href="#" class="inline-block text-sm px-4 py-2 hover:bg-white  rounded text-white mt-4 lg:mt-0">
+                <img src="{% static 'images/france.png' %}" height="35" width="35">
+            </a>
+            <a href="#" class="inline-block text-sm px-4 py-2 hover:bg-white  rounded text-white mt-4 lg:mt-0">
+                <img src="{% static 'images/england.png' %}" height="35" width="35">
+            </a>
+        </div>
+    </div>
+</nav>
+</body>
+</html>

@@ -1,0 +1,46 @@
+{% load static %}
+{% load tailwind_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.js"></script>
+    {% tailwind_css %}
+</head>
+<body class="bg-gray-100">
+{% include "home/navbar.html" %}
+<div class="flex" id="app">
+    <div class="w-9/12 p-4">
+        <div class="w-full bg-white ">
+            <input oninput="search(this.value)" class="shadow appearance-none border-none rounded  w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="pokemon_search" type="text" placeholder="Nom du pokemon">
+        </div>
+        <div class="grid grid-cols-4 mt-2 gap-4">
+            {% for pokemon in pokemons %}
+                <div class="rounded-xl overflow-hidden shadow-lg bg-white p-2 pokemon cursor-pointer" v-on:click="greet({{ pokemon.id }})">
+                    <input type="hidden" name="id" class="id_pokemon" value={{ pokemon.id }} />
+                    <div class="flex content-center justify-center">
+                        <img class="" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{ pokemon.id }}.png">
+                    </div>
+                    <div class="flex justify-center content-between">
+                        <div class="flex-col text-center">
+                            <h1 class="text-gray-700 text-xs" >N°{{ pokemon.id }}</h1>
+                            <h1 class="font-bold mt-2 text-xl">{{ pokemon.name }}</h1>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <h1 v-for="type in types">{{ type }}</h1>
+
+    <div id="pokemon_list" class="p-4 mt-4 w-1/4 bg-white rounded-xl shadow-lg ">
+        {% include "home/pokemon_description.html" %}
+    </div>
+</div>
+<script src="{% static 'js/pokedex.js' %}"></script>
+</body>
+</html>
