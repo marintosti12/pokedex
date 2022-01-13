@@ -10,6 +10,9 @@ let app = new Vue({
         img_src: "",
         loading: false
     },
+    mounted() {
+      this.greet(1)
+    },
     methods: {
         savePokemonInTeam: function ()
         {
