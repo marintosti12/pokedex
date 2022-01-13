@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Pokedex</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.js"></script>
@@ -35,9 +35,10 @@
             {% endfor %}
         </div>
     </div>
-    <h1 v-for="type in types">{{ type }}</h1>
-
     <div id="pokemon_list" class="p-4 mt-4 w-1/4 bg-white rounded-xl shadow-lg ">
+        <div class="flex justify-center">
+          <div v-if="!loading" class="lds-facebook"><div></div><div></div><div></div></div>
+        </div>
         {% include "home/pokemon_description.html" %}
     </div>
 </div>

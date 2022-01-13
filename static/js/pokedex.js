@@ -7,12 +7,13 @@ let app = new Vue({
         types: [],
         stats: [],
         current_data: null,
-        img_src: ""
+        img_src: "",
+        loading: false
     },
     methods: {
         savePokemonInTeam: function ()
         {
-            pokemons = JSON.parse(localStorage.getItem("pokemons"))
+            let pokemons = JSON.parse(localStorage.getItem("pokemons"))
 
             if (pokemons != null) {
                 for (let i = 0; i < pokemons.length; i++) {
@@ -69,8 +70,10 @@ let app = new Vue({
                 return
             else {
                 const instance = this;
+                this.loading = false
                 this.current_id = id
                 this.img_src = "https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/other/official-artwork/"+this.current_id+".png?raw=true"
+
                 axios.get('pokemon/', {
                     params: {
                         id: this.current_id
@@ -83,6 +86,7 @@ let app = new Vue({
                     for (let i = 0; i < types.length; i++)
                         instance.types.push(types[i].type.name)
                     instance.current_data = response.data.data
+                    instance.loading = true
                 }).catch(errors => console.log(errors))
             }
         }

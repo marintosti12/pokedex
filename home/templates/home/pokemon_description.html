@@ -2,12 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
 </head>
 <body>
-<div class="">
+<div>
     <div class="flex content-center justify-center ">
-        <img id="pokemon_img" class="w-64" :src="img_src">
+        <img v-show="loading" id="pokemon_img" class="w-64" :src="img_src">
     </div>
     <div class="flex justify-center content-between">
         <div class="flex-col text-center">
