@@ -20,6 +20,15 @@ def get_info_pokemon(request):
     data = response.json()
     return JsonResponse({"data": data}, status = 200)
 
+def get_french_name(url, default):
+    response = requests.get(url)
+    data = response.json()
+    for d in data["names"]:
+        if d["language"]["name"] == "fr":
+            return d["name"]
+
+    return default
+
 
 def get_all_pokemons(request):
     pagination = int(request.GET.get('pagination', 0))
@@ -38,7 +47,8 @@ def get_all_pokemons(request):
     pokemons = []
 
     for result in data["results"]:
-        pokemon = Pokemon(name=result["name"], id=get_id_from_url(result["url"]))
+        url_langages = "https://pokeapi.co/api/v2/pokemon-species/"+get_id_from_url(result["url"])
+        pokemon = Pokemon(name=get_french_name(url_langages, result["name"]), id=get_id_from_url(result["url"]))
         pokemons.append(pokemon)
 
     result = {
