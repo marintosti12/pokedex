@@ -6,28 +6,41 @@ let app = new Vue({
         current_id : 0,
         types: [],
         stats: [],
+        teams: [],
+        team_index: 0,
         current_data: null,
         img_src: "",
         loading: false
     },
     mounted() {
-      this.greet(1)
+        this.teams = JSON.parse(localStorage.getItem("teams"))
+        this.greet(1)
     },
     methods: {
+        selectTeam: function (event, selectedIndex)
+        {
+            if (selectedIndex === 0)
+                return;
+            this.team_index = selectedIndex - 1
+        },
         savePokemonInTeam: function ()
         {
-            let pokemons = JSON.parse(localStorage.getItem("pokemons"))
+            if (this.teams == null)
+                return;
 
-            if (pokemons != null) {
+            let pokemons = this.teams[this.team_index].pokemons
+            if (pokemons == null)
+            {
+                pokemons = [{"name": this.current_data["name"], "id": this.current_id}]
+                this.teams[this.team_index].pokemons = pokemons
+            } else {
                 for (let i = 0; i < pokemons.length; i++) {
-                    if (pokemons[i].name == this.current_data["name"])
+                    if (pokemons[i].name === this.current_data["name"])
                         return
                 }
                 pokemons.push({"name": this.current_data["name"], "id": this.current_id})
-                localStorage.setItem("pokemons", JSON.stringify(pokemons));
-            } else {
-                localStorage.setItem("pokemons", JSON.stringify([{"name": this.current_data["name"], "id": this.current_id}]));
             }
+            localStorage.setItem("teams", JSON.stringify(this.teams));
         },
         getStatColor: function (index)
         {

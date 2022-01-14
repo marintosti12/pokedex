@@ -15,8 +15,25 @@
 {% include "home/navbar.html" %}
 <div class="flex" id="app">
     <div class="w-9/12 p-4">
-        <div class="w-full bg-white ">
-            <input oninput="search(this.value)" class="shadow appearance-none border-none rounded  w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="pokemon_search" type="text" placeholder="Nom du pokemon">
+        <div class="flex">
+            <div class="flex-row bg-white w-full">
+                <input oninput="search(this.value)" class="shadow appearance-none border-none rounded  w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="pokemon_search" type="text" placeholder="Nom du pokemon">
+            </div>
+            <div class="flex px-4">
+                <div class="flex-row ">
+                    <a href="/?pagination={{ pagination }}&state=remv"><button class="bg-red-500 hover:bg-red-700 text-white font-bold py-4 px-4 rounded">
+                        Précedent
+                    </button></a>
+                </div>
+                <div class="flex-row w-32 text-center ">
+                    <h1 class="mt-4">{{ pagination }} - {{ next }}</h1>
+                </div>
+                <div class="flex-row">
+                    <a href="/?pagination={{ pagination }}&state=add"><button class="bg-red-500 hover:bg-red-700 text-white font-bold py-4 px-4 rounded">
+                        Suivant
+                    </button></a>
+                </div>
+            </div>
         </div>
         <div class="grid grid-cols-4 mt-2 gap-4">
             {% for pokemon in pokemons %}
@@ -37,7 +54,7 @@
     </div>
     <div id="pokemon_list" class="p-4 mt-4 w-1/4 bg-white rounded-xl shadow-lg ">
         <div class="flex justify-center">
-          <div v-if="!loading" class="lds-facebook"><div></div><div></div><div></div></div>
+            <div v-if="!loading" class="lds-facebook"><div></div><div></div><div></div></div>
         </div>
         {% include "home/pokemon_description.html" %}
     </div>

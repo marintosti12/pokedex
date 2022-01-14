@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,15 +47,13 @@
         </div>
     </div>
     <div class="flex justify-center en mt-8">
-        <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+        <select @change="selectTeam($event, $event.target.selectedIndex)" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
           <option>Ajouter un pokemon une equipe</option>
-          <option>New Mexico</option>
-          <option>Missouri</option>
-          <option>Texas</option>
+          <option v-for="(team, index) in teams">[[ team.id ]]</option>
         </select>
     </div>
     <div class="flex justify-center en mt-8">
-        <button class="bg-orange-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        <button v-on:click="savePokemonInTeam()" class="bg-orange-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             Confirmer l'ajout dans l'equipe
         </button>
     </div>

@@ -3,25 +3,35 @@ let app = new Vue({
     el: "#app",
     delimiters: ['[[', ']]'],
     data: {
-        pokemons:[]
+        teams:[]
     },
     methods: {
+        createTeam: function ()
+        {
+            if (this.teams == null) {
+                this.teams = [{id: 0, pokemons: null}];
+            } else {
+                let oldIndex = this.teams.length;
+                this.teams.push( {id: oldIndex, pokemons: null})
+            }
+            localStorage.setItem("teams", JSON.stringify(this.teams))
+        },
         getPokemonImage: function (index)
         {
             let url = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+index+".png";
 
             return url
         },
-        deletePokemon: function (ev, index)
+        deletePokemon: function (ev, index, team_id)
         {
-            console.log(ev);
-            ev.stopPropagation()
-            this.pokemons.splice(index, 1)
-            localStorage.setItem("pokemons", JSON.stringify(this.pokemons))
+            if (this.teams == null)
+                return
+            this.teams[team_id].pokemons.splice(index, 1)
+            localStorage.setItem("teams", JSON.stringify(this.teams))
         }
 
     },
     mounted () {
-        this.pokemons = JSON.parse(localStorage.getItem("pokemons"));
+        this.teams = JSON.parse(localStorage.getItem("teams"));
     }
 });

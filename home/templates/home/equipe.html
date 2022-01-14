@@ -14,21 +14,32 @@
 <body class="bg-gray-100">
 {% include "home/navbar.html" %}
 <div id="app">
-    <div class="grid grid-cols-4 mt-2 gap-4 p-4">
-        <div class="rounded-xl overflow-hidden shadow-lg bg-white p-2 pokemon cursor-pointer" v-for="(pokemon, index) in pokemons" :key="pokemon.id">
-            <div class="flex content-center justify-center">
-                <img class="" :src="getPokemonImage(pokemon.id)">
-            </div>
-            <div class="flex justify-center content-between">
-                <div class="flex-col text-center">
-                    <h1 class="text-gray-700 text-xs" >N°[[ pokemon.id]]</h1>
-                    <h1 class="font-bold mt-2 text-xl">[[ pokemon.name ]]</h1>
+    <div class="p-4">
+        <button v-on:click="createTeam()" class="bg-red-500 mt-4 ml-2 p-4 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Creer Une equipe
+        </button>
+    </div>
+
+    <div v-for="(team, index) in teams" class="p-4">
+        <h1 class="text-xl font-bold block m-8">Team Number #[[team.id]]</h1>
+        <h1 class="ml-8 text-red-700" v-if="!team.pokemons.length">Aucun pokemons dans cette équipe</h1>
+
+        <div class="grid grid-cols-4 mt-2 gap-4 p-4">
+            <div class="rounded-xl overflow-hidden shadow-lg bg-white p-2 pokemon cursor-pointer" v-for="(pokemon, index) in team.pokemons" :key="pokemon.id">
+                <div class="flex content-center justify-center">
+                    <img class="" :src="getPokemonImage(pokemon.id)">
                 </div>
-            </div>
-            <div class="flex justify-center en mt-8">
-                <button v-on:click="deletePokemon($event, index)" class="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    Supprimer
-                </button>
+                <div class="flex justify-center content-between">
+                    <div class="flex-col text-center">
+                        <h1 class="text-gray-700 text-xs" >N°[[ pokemon.id]]</h1>
+                        <h1 class="font-bold mt-2 text-xl">[[ pokemon.name ]]</h1>
+                    </div>
+                </div>
+                <div class="flex justify-center en mt-8">
+                    <button v-on:click="deletePokemon($event, index, team.id)" class="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Supprimer
+                    </button>
+                </div>
             </div>
         </div>
     </div>

@@ -21,12 +21,29 @@ def get_info_pokemon(request):
     return JsonResponse({"data": data}, status = 200)
 
 
-def get_all_pokemons():
-    response = requests.get("https://pokeapi.co/api/v2/pokemon")
+def get_all_pokemons(request):
+    pagination = int(request.GET.get('pagination', 0))
+    state = request.GET.get('state', '')
+
+    if state == 'add':
+        pagination = pagination + 20
+
+    if state == 'remv':
+        pagination = pagination - 20
+        if pagination < 0:
+            pagination = 0
+
+    response = requests.get("https://pokeapi.co/api/v2/pokemon?limit=20&offset="+str(pagination))
     data = response.json()
     pokemons = []
 
     for result in data["results"]:
         pokemon = Pokemon(name=result["name"], id=get_id_from_url(result["url"]))
         pokemons.append(pokemon)
-    return pokemons
+
+    result = {
+        'pokemons': pokemons,
+        'pagination': pagination,
+        'next': pagination + 20
+    }
+    return result

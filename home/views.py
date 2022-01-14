@@ -6,10 +6,9 @@ from home.controller.pokedexController import get_all_pokemons
 # Create your views here.
 
 def index(request):
-    passed_data = {
-        'pokemons': get_all_pokemons()
-    }
-    return render(request, "home/index.html", passed_data)
+    api_call = get_all_pokemons(request)
+
+    return render(request, "home/index.html", api_call)
 
 
 def equipe(request):
