@@ -7,7 +7,6 @@
     <meta charset="UTF-8">
     <title>Pokedex</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.js"></script>
     {% tailwind_css %}
 </head>
@@ -17,39 +16,39 @@
     <div class="w-9/12 p-4">
         <div class="flex">
             <div class="flex-row bg-white w-full">
-                <input oninput="search(this.value)" class="shadow appearance-none border-none rounded  w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="pokemon_search" type="text" placeholder="Nom du pokemon">
+                <input class="shadow appearance-none border-none rounded  w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="pokemon_search" type="text" placeholder="Nom du pokemon" v-model="searchinput">
             </div>
             <div class="flex px-4">
                 <div class="flex-row ">
-                    <a href="/?pagination={{ pagination }}&state=remv"><button class="bg-red-500 hover:bg-red-700 text-white font-bold py-4 px-4 rounded">
+                    <button v-on:click="previousPage" class="bg-red-500 hover:bg-red-700 text-white font-bold py-4 px-4 rounded">
                         Précedent
-                    </button></a>
+                    </button>
                 </div>
                 <div class="flex-row w-32 text-center ">
-                    <h1 class="mt-4">{{ pagination }} - {{ next }}</h1>
+                    <h1 class="mt-4">[[ pagination ]] - [[ next ]]</h1>
                 </div>
                 <div class="flex-row">
-                    <a href="/?pagination={{ pagination }}&state=add"><button class="bg-red-500 hover:bg-red-700 text-white font-bold py-4 px-4 rounded">
+                    <button v-on:click="nextPage" class="bg-red-500 hover:bg-red-700 text-white font-bold py-4 px-4 rounded">
                         Suivant
-                    </button></a>
+                    </button>
                 </div>
             </div>
         </div>
+        <div class="flex justify-center">
+            <div v-if="!loading_pokemon" class="lds-facebook"><div></div><div></div><div></div></div>
+        </div>
         <div class="grid grid-cols-4 mt-2 gap-4">
-            {% for pokemon in pokemons %}
-                <div class="rounded-xl overflow-hidden shadow-lg bg-white p-2 pokemon cursor-pointer" v-on:click="greet({{ pokemon.id }})">
-                    <input type="hidden" name="id" class="id_pokemon" value={{ pokemon.id }} />
+                <div class="rounded-xl overflow-hidden shadow-lg bg-white p-2 pokemon cursor-pointer" v-on:click="greet([[ pokemon.pk ]])" v-if="pokemon.show"  v-for="pokemon in pokemons">
                     <div class="flex content-center justify-center">
-                        <img class="" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{ pokemon.id }}.png">
+                        <img class="" :src="getPokemonImage([[pokemon.pk]])">
                     </div>
                     <div class="flex justify-center content-between">
                         <div class="flex-col text-center">
-                            <h1 class="text-gray-700 text-xs" >N°{{ pokemon.id }}</h1>
-                            <h1 class="font-bold mt-2 text-xl">{{ pokemon.name }}</h1>
+                            <h1 class="text-gray-700 text-xs" >N°[[ pokemon.pk ]]</h1>
+                            <h1 class="font-bold mt-2 text-xl">[[ pokemon.fields.name ]]</h1>
                         </div>
                     </div>
                 </div>
-            {% endfor %}
         </div>
     </div>
     <div id="pokemon_list" class="p-4 mt-4 w-1/4 bg-white rounded-xl shadow-lg ">
@@ -59,6 +58,7 @@
         {% include "home/pokemon_description.html" %}
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="{% static 'js/pokedex.js' %}"></script>
 </body>
 </html>

@@ -11,8 +11,8 @@
     </div>
     <div class="flex justify-center content-between">
         <div class="flex-col text-center">
-            <h1 class="text-gray-700 text-xs" id="pokemon_id">N°1</h1>
-            <h1 class="font-bold mt-2 text-xl" id="pokemon_name">Default</h1>
+            <h1 class="text-gray-700 text-xs" id="pokemon_id" v-if="current_data">N°[[current_data.id]]</h1>
+            <h1 class="font-bold mt-2 text-xl" id="pokemon_name" v-if="current_data">[[current_data.name]]</h1>
         </div>
     </div>
     <div class="flex justify-center content-between mt-4">
@@ -26,13 +26,13 @@
         <div class="flex-row text-center w-full p-2">
             <h1>HEIGHT</h1>
             <div class="bg-gray-100 border-2 border-gray-400 rounded-xl mt-2">
-                <h2 id="pokemon_height">1.89</h2>
+                <h2 id="pokemon_height" v-if="current_data">[[current_data.height]]</h2>
             </div>
         </div>
         <div class="flex-row text-center w-full p-2">
             <h1>WEIGHT</h1>
             <div class="bg-gray-100 border-2 border-gray-400 rounded-xl mt-2">
-                <h2 id="pokemon_weight">1.89</h2>
+                <h2 id="pokemon_weight" v-if="current_data">[[current_data.weight]]</h2>
             </div>
         </div>
     </div>

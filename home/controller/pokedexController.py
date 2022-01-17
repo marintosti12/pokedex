@@ -1,4 +1,7 @@
+import json
+
 import requests
+from django.core import serializers
 from django.http import JsonResponse
 
 from home.models.Pokemon import Pokemon
@@ -18,6 +21,8 @@ def get_info_pokemon(request):
     print(url)
     response = requests.get(url)
     data = response.json()
+    url_langages = "https://pokeapi.co/api/v2/pokemon-species/" + id
+    data["name"] = get_french_name(url_langages, data["name"])
     return JsonResponse({"data": data}, status = 200)
 
 def get_french_name(url, default):
@@ -52,8 +57,8 @@ def get_all_pokemons(request):
         pokemons.append(pokemon)
 
     result = {
-        'pokemons': pokemons,
+        'pokemons': serializers.serialize('json', pokemons),
         'pagination': pagination,
         'next': pagination + 20
     }
-    return result
+    return JsonResponse(result, status=200)
