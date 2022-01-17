@@ -19,3 +19,5 @@
     
     
 # Présentation du projet
+
+[logo]: https://github.com/marintosti12/pokedex/blob/main/images/home.png
