@@ -20,6 +20,7 @@
     
 # Présentation du projet
 
-[logo]: https://github.com/marintosti12/pokedex/blob/main/images/home.png?raw=true
 
-[logo]: https://github.com/marintosti12/pokedex/blob/main/images/teams.png?raw=true
+![alt text](https://github.com/marintosti12/pokedex/blob/main/images/home.png?raw=true)
+
+![alt text](https://github.com/marintosti12/pokedex/blob/main/images/teams.png?raw=true)
