@@ -10,6 +10,10 @@ Welcome to pokedex's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   installation
+   views
+   models
+   controllers
 
 
 Indices and tables

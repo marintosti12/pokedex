@@ -9,7 +9,7 @@ let app = new Vue({
         createTeam: function ()
         {
             if (this.teams == null) {
-                this.teams = [{id: 0, pokemons: null}];
+                this.teams = [{id: 0, pokemons: []}];
             } else {
                 let oldIndex = this.teams.length;
                 this.teams.push( {id: oldIndex, pokemons: null})
