@@ -1,5 +1,9 @@
 # pokedex
 
+# Description
+Le projet pokedex est un projet python sous django qui a pour but de lister les pokemons et leur information,
+mais aussi a pour fonctionnalité l'ajout de pokemon dans différentes équipes.
+
 # Installation
 
   1.Cloner le repo
