@@ -36,5 +36,7 @@ mais qui a aussi pour fonctionnalité l'ajout de pokemon dans différentes équi
   - Aller dans le dossier docs
 
   - faire la commande => make html
+
+  - ouvrir le fichier index.html
   
 
